@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full System Wipe Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        #countdown {
+            font-size: 30px;
+            font-weight: bold;
+            color: red;
+        }
+        #message {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Press Enter to Continue...</h1>
+    <button id="startBtn">Press Me</button>
+    <p id="message"></p>
+    <p id="countdown"></p>
+
+    <script>
+        let count = 10;
+        let countdownInterval;
+        const startBtn = document.getElementById('startBtn');
+        const messageEl = document.getElementById('message');
+        const countdownEl = document.getElementById('countdown');
+
+        startBtn.addEventListener('click', () => {
+            messageEl.textContent = 'What did you think would happen?';
+            setTimeout(() => {
+                messageEl.textContent = 'Press again to continue...';
+                startBtn.textContent = 'Press Me Again';
+                startBtn.disabled = false;
+            }, 2000);
+        });
+
+        startBtn.addEventListener('click', () => {
+            messageEl.textContent = 'Oh no... did you just... I dare you to do it again!';
+            setTimeout(() => {
+                messageEl.textContent = 'Time to pay... Full system wipe initiated...';
+                countdown();
+            }, 3000);
+        });
+
+        function countdown() {
+            countdownInterval = setInterval(() => {
+                countdownEl.textContent = `${count}...`;
+                count--;
+                if (count < 0) {
+                    clearInterval(countdownInterval);
+                    messageEl.textContent = "Just kidding! But don't push your luck...";
+                    countdownEl.textContent = '';
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
